@@ -16,6 +16,7 @@ namespace pracitca1
             conn.Open();
             //String sql = "SELECT * FROM `pueblacapital` WHERE texto LIKE '%tel%'";
             String sql = "SELECT SUBSTRING(texto, 1, 22) AS ExtractString FROM pueblacapital WHERE texto LIKE '%Tipo:%'";
+            String sql = "SELECT SUBSTRING(texto, LOCATE('incidente',texto), 16) AS ExtractString FROM pueblacapital;";
             MySqlCommand comm= new MySqlCommand(sql, conn);
             MySqlDataReader dr = comm.ExecuteReader();
             String line = "";
@@ -23,7 +24,7 @@ namespace pracitca1
             while (dr.Read())
             {
                 //line += dr.GetString(1)+"\n";
-                line += dr.GetString(0)+"\n";
+                line += dr.GetString(0)+"\n\n";
             }
             richTextBox1.Text = line;
         }
